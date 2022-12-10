@@ -1,16 +1,40 @@
-# This is a sample Python script.
+# Пожалуйста, проверьте и предыдущие задания, если Вам не составит труда:)
+import time
+from threading import Thread
+import socket
+#Потоки
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def remind():
+    print("Введите напоминание")
+    text = str(input())
+    print("Через сколько минут его вывести?")
+    text_time = float(input())
+    time.sleep(text_time * 60)
+    print(text)
+th = Thread(target=remind, args=())
+th.start()
+time.sleep(10)
+print("Подождите пока поток работает\nПрограммист знает тайны Вселенной всей,\nОн имеет огромную силу.\nОн путь нужный отыщет мышкой своей,\nИ найдёт золотую жилу.\n")
 
+#Клиент
+connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+IP = "83.221.209.6"
+PORT = 80
+connection.connect((IP, PORT))
+rd = connection.recv(1024)
+print(rd.decode('utf8'))
+connection.send("Сообщение серверу".encode('utf8'))
+connection.close()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+#Хэш-таблица.Словарь представляет собой хеш-таблицу и называется ассоциативным массивом
+name = input("Введите имя пользователя: ")
+data = {"John": 56411,
+        "Mike": 12122,
+        "Anna": 94120,
+        "Nick": 97444}
+for key, value in data.items():
+    if name in key:
+        print(value)
+        break
+else:
+    print("Пользователь не найден")
